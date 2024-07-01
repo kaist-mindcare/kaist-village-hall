@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "KAIST Village Hall",
+    "slug": "kaist-village-hall",
+    "version": "0.1.0",
+    "githubUrl": "https://github.com/kaist-mindcare/kaist-village-hall",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "icon": "./src/assets/image/icon.png",
+    "scheme": "myapp",
+    "plugins": ["expo-router"],
+    "splash": {
+      "backgroundColor": "#ffffff",
+      "resizeMode": "contain",
+      "image": "./src/assets/image/splash.png"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/image/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "dev.kaistian.villagehall"
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./src/assets/image/favicon.png",
+      "bundler": "metro"
+    },
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "e2fb88e6-377e-4703-b300-982998955493"
+      }
+    }
+  }
+}

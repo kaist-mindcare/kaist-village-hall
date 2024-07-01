@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16.3
+    container_name: kaist-village-hall-db
+    ports:
+      - '${DB_PORT:?err}:5432'
+    env_file: ../packages/api/.env
+    environment:
+      - POSTGRES_USER=${DB_USER:?err}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:?err}
+      - POSTGRES_DB=${DB_NAME:?err}
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
