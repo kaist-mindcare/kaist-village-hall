@@ -1,0 +1,558 @@
+{
+  "id": "4d0b753d-7604-40d0-aa15-43959cbcd47b",
+  "prevId": "b420737c-3fa1-4a61-8318-5a9f10c30243",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.auth_group": {
+      "name": "auth_group",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.auth_group_auth_permission": {
+      "name": "auth_group_auth_permission",
+      "schema": "",
+      "columns": {
+        "group_id": {
+          "name": "group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "permission_id": {
+          "name": "permission_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_group_auth_permission_group_id_auth_group_id_fk": {
+          "name": "auth_group_auth_permission_group_id_auth_group_id_fk",
+          "tableFrom": "auth_group_auth_permission",
+          "tableTo": "auth_group",
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "auth_group_auth_permission_permission_id_auth_permission_id_fk": {
+          "name": "auth_group_auth_permission_permission_id_auth_permission_id_fk",
+          "tableFrom": "auth_group_auth_permission",
+          "tableTo": "auth_permission",
+          "columnsFrom": ["permission_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "auth_group_auth_permission_group_id_permission_id_pk": {
+          "name": "auth_group_auth_permission_group_id_permission_id_pk",
+          "columns": ["group_id", "permission_id"]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.auth_group_auth_user": {
+      "name": "auth_group_auth_user",
+      "schema": "",
+      "columns": {
+        "group_id": {
+          "name": "group_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_group_auth_user_group_id_auth_group_id_fk": {
+          "name": "auth_group_auth_user_group_id_auth_group_id_fk",
+          "tableFrom": "auth_group_auth_user",
+          "tableTo": "auth_group",
+          "columnsFrom": ["group_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "auth_group_auth_user_user_id_auth_user_id_fk": {
+          "name": "auth_group_auth_user_user_id_auth_user_id_fk",
+          "tableFrom": "auth_group_auth_user",
+          "tableTo": "auth_user",
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "auth_group_auth_user_user_id_group_id_pk": {
+          "name": "auth_group_auth_user_user_id_group_id_pk",
+          "columns": ["user_id", "group_id"]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.auth_kaist": {
+      "name": "auth_kaist",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "uid": {
+          "name": "uid",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name_ko": {
+          "name": "name_ko",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name_en": {
+          "name": "name_en",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "varchar(16)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "student_number": {
+          "name": "student_number",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "department_id": {
+          "name": "department_id",
+          "type": "smallint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_kaist_user_id_auth_user_id_fk": {
+          "name": "auth_kaist_user_id_auth_user_id_fk",
+          "tableFrom": "auth_kaist",
+          "tableTo": "auth_user",
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "auth_kaist_uid_unique": {
+          "name": "auth_kaist_uid_unique",
+          "nullsNotDistinct": false,
+          "columns": ["uid"]
+        }
+      }
+    },
+    "public.auth_permission": {
+      "name": "auth_permission",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "code": {
+          "name": "code",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.auth_permission_auth_user": {
+      "name": "auth_permission_auth_user",
+      "schema": "",
+      "columns": {
+        "permission_id": {
+          "name": "permission_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "auth_permission_auth_user_permission_id_auth_permission_id_fk": {
+          "name": "auth_permission_auth_user_permission_id_auth_permission_id_fk",
+          "tableFrom": "auth_permission_auth_user",
+          "tableTo": "auth_permission",
+          "columnsFrom": ["permission_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "auth_permission_auth_user_user_id_auth_user_id_fk": {
+          "name": "auth_permission_auth_user_user_id_auth_user_id_fk",
+          "tableFrom": "auth_permission_auth_user",
+          "tableTo": "auth_user",
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "auth_permission_auth_user_user_id_permission_id_pk": {
+          "name": "auth_permission_auth_user_user_id_permission_id_pk",
+          "columns": ["user_id", "permission_id"]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.auth_user": {
+      "name": "auth_user",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "nickname": {
+          "name": "nickname",
+          "type": "varchar(64)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.village_post": {
+      "name": "village_post",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "author_id": {
+          "name": "author_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "village_post_author_id_auth_user_id_fk": {
+          "name": "village_post_author_id_auth_user_id_fk",
+          "tableFrom": "village_post",
+          "tableTo": "auth_user",
+          "columnsFrom": ["author_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.village_post_comment": {
+      "name": "village_post_comment",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "author_id": {
+          "name": "author_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "post_id": {
+          "name": "post_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "village_post_comment_author_id_auth_user_id_fk": {
+          "name": "village_post_comment_author_id_auth_user_id_fk",
+          "tableFrom": "village_post_comment",
+          "tableTo": "auth_user",
+          "columnsFrom": ["author_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "village_post_comment_post_id_village_post_id_fk": {
+          "name": "village_post_comment_post_id_village_post_id_fk",
+          "tableFrom": "village_post_comment",
+          "tableTo": "village_post",
+          "columnsFrom": ["post_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.village_post_like": {
+      "name": "village_post_like",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "post_id": {
+          "name": "post_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "village_post_like_user_id_auth_user_id_fk": {
+          "name": "village_post_like_user_id_auth_user_id_fk",
+          "tableFrom": "village_post_like",
+          "tableTo": "auth_user",
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "village_post_like_post_id_village_post_id_fk": {
+          "name": "village_post_like_post_id_village_post_id_fk",
+          "tableFrom": "village_post_like",
+          "tableTo": "village_post",
+          "columnsFrom": ["post_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "village_post_like_user_id_post_id_pk": {
+          "name": "village_post_like_user_id_post_id_pk",
+          "columns": ["user_id", "post_id"]
+        }
+      },
+      "uniqueConstraints": {}
+    },
+    "public.village_post_tag": {
+      "name": "village_post_tag",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(32)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.village_post_village_post_tag": {
+      "name": "village_post_village_post_tag",
+      "schema": "",
+      "columns": {
+        "post_id": {
+          "name": "post_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "tag_id": {
+          "name": "tag_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "village_post_village_post_tag_post_id_village_post_id_fk": {
+          "name": "village_post_village_post_tag_post_id_village_post_id_fk",
+          "tableFrom": "village_post_village_post_tag",
+          "tableTo": "village_post",
+          "columnsFrom": ["post_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "village_post_village_post_tag_tag_id_village_post_tag_id_fk": {
+          "name": "village_post_village_post_tag_tag_id_village_post_tag_id_fk",
+          "tableFrom": "village_post_village_post_tag",
+          "tableTo": "village_post_tag",
+          "columnsFrom": ["tag_id"],
+          "columnsTo": ["id"],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "village_post_village_post_tag_post_id_tag_id_pk": {
+          "name": "village_post_village_post_tag_post_id_tag_id_pk",
+          "columns": ["post_id", "tag_id"]
+        }
+      },
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

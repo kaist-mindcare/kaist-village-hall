@@ -8,6 +8,11 @@ import {
 } from 'drizzle-orm/pg-core'
 
 import { createdAt, id } from '@/db/field'
+import {
+  villagePost,
+  villagePostComment,
+  villagePostLike,
+} from '@/db/schema/post'
 
 // User
 
@@ -19,6 +24,9 @@ export const authUser = pgTable('auth_user', {
 export const authUserRelations = relations(authUser, ({ many }) => ({
   userGroups: many(authGroupToAuthUser),
   userPermissions: many(authPermissionToAuthUser),
+  posts: many(villagePost),
+  postComments: many(villagePostComment),
+  postLikes: many(villagePostLike),
 }))
 
 // KAIST
