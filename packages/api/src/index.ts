@@ -1,12 +1,14 @@
 import { Hono } from 'hono'
+import { logger } from 'hono/logger'
 
-import { env } from '@/env'
+import auth from '@/route/auth'
 
 const app = new Hono({ strict: false })
 
+// Debugging
+app.use(logger())
+
 // Routes
-app.get('/', (c) => {
-  return c.json({ message: 'Hello World!', env }, 200)
-})
+app.route('/auth', auth)
 
 export default app

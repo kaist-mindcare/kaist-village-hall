@@ -17,9 +17,11 @@
     "drizzle-zod": "^0.5.1",
     "hono": "^4.4.7",
     "postgres": "^3.4.4",
+    "qs": "^6.12.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/qs": "^6.9.15",
     "drizzle-kit": "^0.22.7",
     "typescript": "^5.5.2"
   }
