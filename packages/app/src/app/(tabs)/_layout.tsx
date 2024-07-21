@@ -1,7 +1,10 @@
 import { Tabs } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import { FireFill, HeartHandFill, Home4Fill, MenuFill } from '@/ui/icon'
+import { FireFill } from '@/ui/icon/FireFill'
+import { HeartHandFill } from '@/ui/icon/HeartHandFill'
+import { Home4Fill } from '@/ui/icon/Home4Fill'
+import { MenuFill } from '@/ui/icon/MenuFill'
 import { textStyles } from '@/ui/style/text'
 
 const TabLayout = () => {
