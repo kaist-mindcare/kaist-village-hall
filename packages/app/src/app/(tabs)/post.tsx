@@ -1,21 +1,29 @@
-import { StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { ThemedText } from '@/ui/component/ThemedText'
+import { posts } from '@/data/post'
+import { PostItem } from '@/ui/component/PostItem'
 
 const PostTab: React.FC = () => {
   return (
-    <View style={styles.body}>
-      <ThemedText typography="h1">Post</ThemedText>
-    </View>
+    <SafeAreaView style={styles.body} edges={['top']}>
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => <PostItem {...item} />}
+        keyExtractor={(item) => item.id.toFixed()}
+        style={styles.list}
+      />
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   body: {
-    justifyContent: 'center',
-    alignItems: 'center',
     height: '100%',
     backgroundColor: '#fff',
+  },
+  list: {
+    width: '100%',
   },
 })
 
