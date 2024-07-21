@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
-import { text } from '@/ui/style/text'
+import { ThemedText } from '@/ui/component/ThemedText'
 
 const PostTab: React.FC = () => {
   return (
     <View style={styles.body}>
-      <Text style={text.h1}>Post</Text>
+      <ThemedText typography="h1">Post</ThemedText>
     </View>
   )
 }

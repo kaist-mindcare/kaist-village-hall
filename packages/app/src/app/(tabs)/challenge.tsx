@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
-import { text } from '@/ui/style/text'
+import { ThemedText } from '@/ui/component/ThemedText'
 
 const ChallengeTab: React.FC = () => {
   return (
     <View style={styles.body}>
-      <Text style={text.h1}>Challenge</Text>
+      <ThemedText typography="h1">Challenge</ThemedText>
     </View>
   )
 }

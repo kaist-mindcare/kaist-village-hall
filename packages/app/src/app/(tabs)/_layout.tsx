@@ -2,7 +2,7 @@ import { Tabs } from 'expo-router'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { FireFill, HeartHandFill, Home4Fill, MenuFill } from '@/ui/icon'
-import { text } from '@/ui/style/text'
+import { textStyles } from '@/ui/style/text'
 
 const TabLayout = () => {
   const insets = useSafeAreaInsets()
@@ -15,7 +15,7 @@ const TabLayout = () => {
         tabBarInactiveTintColor: '#bebebe',
         tabBarStyle: {
           elevation: 0,
-          borderTopWidth: 0.9,
+          borderTopWidth: 0.5,
           borderTopColor: '#f0f0f0',
           height: 56 + insets.bottom,
           paddingTop: 4,
@@ -27,7 +27,7 @@ const TabLayout = () => {
           height: 48,
           paddingVertical: 4,
         },
-        tabBarLabelStyle: [text.bottomTabLabel, { paddingTop: 2 }],
+        tabBarLabelStyle: [textStyles.bottomTabLabel, { paddingTop: 2 }],
         tabBarHideOnKeyboard: true,
       }}
     >
