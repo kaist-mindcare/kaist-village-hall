@@ -1,7 +1,9 @@
+name: kaist-village-hall
+
 services:
   db:
     image: postgres:16.3
-    container_name: kaist-village-hall-db
+    container_name: kaist-village-hall-dev-db
     ports:
       - '${DB_PORT:?err}:5432'
     env_file: ../packages/api/.env

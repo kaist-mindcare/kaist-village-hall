@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "bun build src/index.ts --outdir build --target bun",
-    "db": "docker compose -f ../../.docker/docker-compose.yml",
+    "build:image": "docker build -f ../../.docker/api.Dockerfile -t yuwol/kaist-village-hall-api --platform linux/amd64 ../..",
+    "db": "docker compose -f ../../.docker/docker-compose.dev.yml",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
