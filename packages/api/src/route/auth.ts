@@ -8,7 +8,7 @@ import { env } from '@/env'
 const app = new Hono()
 
 app.post(
-  '/kaist/callback',
+  '/kaist/signin',
   zValidator(
     'form',
     z.object({
