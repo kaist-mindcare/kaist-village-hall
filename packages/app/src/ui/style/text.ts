@@ -13,7 +13,7 @@ export const textStyles = {
   },
   caption: {
     fontSize: 12,
-    lineHeight: 18,
+    lineHeight: 16,
     fontFamily: 'Pretendard-Regular',
   },
   postRowTitle: {
@@ -25,6 +25,11 @@ export const textStyles = {
     fontSize: 14,
     lineHeight: 21,
     fontFamily: 'Pretendard-Regular',
+  },
+  groupRowTitle: {
+    fontSize: 16,
+    lineHeight: 20,
+    fontFamily: 'Pretendard-SemiBold',
   },
   bottomTabLabel: {
     fontSize: 10,

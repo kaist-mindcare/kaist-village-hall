@@ -49,9 +49,9 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="challenge"
+        name="group"
         options={{
-          title: '챌린지',
+          title: '모임',
           tabBarIcon: ({ color }) => <FireFill color={color} />,
         }}
       />
