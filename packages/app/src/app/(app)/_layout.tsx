@@ -28,6 +28,14 @@ const AppLayout = () => {
   return (
     <Stack screenOptions={{ navigationBarColor: '#fff' }}>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="group/submit"
+        options={{ headerBackTitleVisible: false, title: '' }}
+      />
+      <Stack.Screen
+        name="group/[id]"
+        options={{ headerBackTitleVisible: false, title: '' }}
+      />
     </Stack>
   )
 }

@@ -1,12 +1,15 @@
+import { useLocalSearchParams } from 'expo-router'
 import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { ThemedText } from '@/ui/component/ThemedText'
 
 const GroupDetailedPage: React.FC = () => {
+  const { id } = useLocalSearchParams()
+
   return (
-    <SafeAreaView style={styles.body} edges={['top']}>
-      <ThemedText typography="h1">Submit</ThemedText>
+    <SafeAreaView style={styles.body}>
+      <ThemedText typography="h1">Group {id}</ThemedText>
     </SafeAreaView>
   )
 }
