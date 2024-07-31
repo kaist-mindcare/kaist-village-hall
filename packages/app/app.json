@@ -10,7 +10,8 @@
     "scheme": "myapp",
     "plugins": [
       "expo-router",
-      ["expo-asset", { "assets": ["src/assets/image/group-avatar"] }]
+      ["expo-asset", { "assets": ["src/assets/image/group-avatar"] }],
+      "expo-secure-store"
     ],
     "splash": {
       "backgroundColor": "#ffffff",

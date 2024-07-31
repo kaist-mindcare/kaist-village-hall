@@ -36,4 +36,14 @@ export const textStyles = {
     lineHeight: 14,
     fontFamily: 'Pretendard-Medium',
   },
+  input: {
+    fontSize: 17,
+    lineHeight: 22,
+    fontFamily: 'Pretendard-Regular',
+  },
+  bottomButton: {
+    fontSize: 18,
+    lineHeight: 18,
+    fontFamily: 'Pretendard-Medium',
+  },
 } as const satisfies Record<string, TextStyle>
