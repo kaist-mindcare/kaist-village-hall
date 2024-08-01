@@ -5,7 +5,7 @@ import { ThemedText } from '@/ui/component/ThemedText'
 
 const GroupDetailedPage: React.FC = () => {
   return (
-    <SafeAreaView style={styles.body}>
+    <SafeAreaView style={styles.body} edges={['bottom']}>
       <ThemedText typography="h1">Submit</ThemedText>
     </SafeAreaView>
   )

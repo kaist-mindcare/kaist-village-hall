@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react'
 
 import { useSession } from '@/context/session'
+import { StackHeader } from '@/ui/component/StackHeader'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -30,11 +31,11 @@ const AppLayout = () => {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="group/submit"
-        options={{ headerBackTitleVisible: false, title: '' }}
+        options={{ header: () => <StackHeader /> }}
       />
       <Stack.Screen
         name="group/[id]"
-        options={{ headerBackTitleVisible: false, title: '' }}
+        options={{ header: () => <StackHeader /> }}
       />
     </Stack>
   )

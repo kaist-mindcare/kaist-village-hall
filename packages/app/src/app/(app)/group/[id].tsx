@@ -8,7 +8,7 @@ const GroupDetailedPage: React.FC = () => {
   const { id } = useLocalSearchParams()
 
   return (
-    <SafeAreaView style={styles.body}>
+    <SafeAreaView style={styles.body} edges={['bottom']}>
       <ThemedText typography="h1">Group {id}</ThemedText>
     </SafeAreaView>
   )
