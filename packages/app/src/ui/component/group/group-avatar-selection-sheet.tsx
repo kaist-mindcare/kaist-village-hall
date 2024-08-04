@@ -1,5 +1,13 @@
 import { useAssets } from 'expo-asset'
 import { Image } from 'expo-image'
+import {
+  MediaTypeOptions,
+  launchCameraAsync,
+  launchImageLibraryAsync,
+  useCameraPermissions,
+  useMediaLibraryPermissions,
+} from 'expo-image-picker'
+import * as Linking from 'expo-linking'
 import { useState } from 'react'
 import { FlatList, Pressable, StyleSheet, View } from 'react-native'
 import { SvgProps } from 'react-native-svg'
@@ -19,6 +27,8 @@ export const GroupAvatarSelectionSheet: React.FC<
   GroupAvatarSelectionSheetProps
 > = ({ initialAvatar, resolve }) => {
   const [avatar, setAvatar] = useState<string | undefined>(initialAvatar)
+  const [cameraPermission, requestCameraPermission] = useCameraPermissions()
+  const [mediaPermission, requestMediaPermission] = useMediaLibraryPermissions()
   const [assets] = useAssets([
     require('@/assets/image/group-avatar/sun.png'),
     require('@/assets/image/group-avatar/game.png'),
@@ -32,16 +42,46 @@ export const GroupAvatarSelectionSheet: React.FC<
 
   if (!assets || !avatar) return null
 
+  const takePhoto = async () => {
+    if (!cameraPermission?.granted) {
+      if (!cameraPermission?.canAskAgain) Linking.openSettings()
+      const requestRes = await requestCameraPermission()
+      if (!requestRes.granted) return
+    }
+    const result = await launchCameraAsync({
+      mediaTypes: MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    })
+    if (!result.canceled) setAvatar(result.assets[0].uri)
+  }
+
+  const pickImage = async () => {
+    if (!mediaPermission?.granted) {
+      if (!mediaPermission?.canAskAgain) Linking.openSettings()
+      const requestRes = await requestMediaPermission()
+      if (!requestRes.granted) return
+    }
+    const result = await launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    })
+    if (!result.canceled) setAvatar(result.assets[0].uri)
+  }
+
   const images: (
-    | { type: 'button'; icon: React.FC<SvgProps> }
+    | { type: 'button'; icon: React.FC<SvgProps>; onPress: () => Promise<void> }
     | { type: 'image'; src: string }
   )[] = [
-    { type: 'button', icon: Camera2Fill },
+    { type: 'button', icon: Camera2Fill, onPress: takePhoto },
     { type: 'image', src: assets[0].uri },
     { type: 'image', src: assets[1].uri },
     { type: 'image', src: assets[2].uri },
     { type: 'image', src: assets[3].uri },
-    { type: 'button', icon: PicFill },
+    { type: 'button', icon: PicFill, onPress: pickImage },
     { type: 'image', src: assets[4].uri },
     { type: 'image', src: assets[5].uri },
     { type: 'image', src: assets[6].uri },
@@ -58,11 +98,9 @@ export const GroupAvatarSelectionSheet: React.FC<
         data={images}
         renderItem={({ item }) =>
           match(item)
-            .with({ type: 'button' }, ({ icon: Icon }) => (
+            .with({ type: 'button' }, ({ icon: Icon, onPress }) => (
               <Pressable
-                onPress={() => {
-                  // TODO: Implement image selection
-                }}
+                onPress={onPress}
                 style={[styles.listItem, styles.button]}
               >
                 <Icon color="#6a7684" width={24} height={24} />
