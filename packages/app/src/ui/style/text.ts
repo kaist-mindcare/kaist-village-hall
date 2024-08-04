@@ -6,6 +6,11 @@ export const textStyles = {
     lineHeight: 28,
     fontFamily: 'Pretendard-SemiBold',
   },
+  h2: {
+    fontSize: 20,
+    lineHeight: 24,
+    fontFamily: 'Pretendard-SemiBold',
+  },
   body: {
     fontSize: 16,
     lineHeight: 20,
@@ -40,6 +45,11 @@ export const textStyles = {
     fontSize: 17,
     lineHeight: 22,
     fontFamily: 'Pretendard-Regular',
+  },
+  inputLabel: {
+    fontSize: 12,
+    lineHeight: 16,
+    fontFamily: 'Pretendard-Medium',
   },
   bottomButton: {
     fontSize: 18,
