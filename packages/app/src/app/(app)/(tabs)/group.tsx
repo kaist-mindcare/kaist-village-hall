@@ -12,11 +12,14 @@ const GroupTab: React.FC = () => {
   const router = useRouter()
   const [assets] = useAssets([
     require('@/assets/image/group-avatar/plus.png'),
-    require('@/assets/image/group-avatar/exercise.png'),
-    require('@/assets/image/group-avatar/fire.png'),
-    require('@/assets/image/group-avatar/meal.png'),
-    require('@/assets/image/group-avatar/pencil.png'),
     require('@/assets/image/group-avatar/sun.png'),
+    require('@/assets/image/group-avatar/game.png'),
+    require('@/assets/image/group-avatar/soccer.png'),
+    require('@/assets/image/group-avatar/apple.png'),
+    require('@/assets/image/group-avatar/fire.png'),
+    require('@/assets/image/group-avatar/exercise.png'),
+    require('@/assets/image/group-avatar/pencil.png'),
+    require('@/assets/image/group-avatar/violin.png'),
   ])
 
   const randomAvatar = () =>
