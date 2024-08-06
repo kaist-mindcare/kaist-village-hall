@@ -1,6 +1,9 @@
 .expo/
 build/
+dist/
 node_modules/
+
+pnpm-lock.yaml
 
 # macOS
 .DS_Store

@@ -11,6 +11,8 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useBottomSheet } from '@/hook/useBottomSheet'
+import { uploadImage } from '@/lib/api'
+import type { Avatar } from '@/type/avatar'
 import { BottomButton } from '@/ui/component/BottomButton'
 import { TextInput } from '@/ui/component/TextInput'
 import { ThemedText } from '@/ui/component/ThemedText'
@@ -19,9 +21,9 @@ import { PicFill } from '@/ui/icon/PicFill'
 
 const GroupSubmitPage: React.FC = () => {
   const insets = useSafeAreaInsets()
-  const [avatar, setAvatar] = useState<string>()
+  const [avatar, setAvatar] = useState<Avatar>()
   const [assets] = useAssets(require('@/assets/image/group-avatar/sun.png'))
-  const openImageSelect = useBottomSheet<string>(
+  const openImageSelect = useBottomSheet<Avatar>(
     (resolve) => (
       <GroupAvatarSelectionSheet initialAvatar={avatar} resolve={resolve} />
     ),
@@ -29,10 +31,28 @@ const GroupSubmitPage: React.FC = () => {
   )
 
   useEffect(() => {
-    if (assets) setAvatar(assets[0].uri)
+    if (assets) {
+      setAvatar({ uri: assets[0].uri, isLocal: true })
+    }
   }, [assets])
 
   if (!assets) return null
+
+  const onSubmit = async () => {
+    if (!avatar) return
+
+    if (avatar.isLocal) {
+      console.log('Avatar is local:', avatar.uri)
+      return
+    }
+
+    const res = await uploadImage(avatar.uri, { prefix: 'group/avatar' })
+    if (res.ok) {
+      console.log('Avatar saved successfully:', res.url)
+    } else {
+      console.log('Failed to save avatar:', res.code)
+    }
+  }
 
   return (
     <View style={styles.background}>
@@ -74,10 +94,11 @@ const GroupSubmitPage: React.FC = () => {
         </ScrollView>
         <BottomButton
           text="모임 만들기"
-          backgroundColor="#000"
+          backgroundColor="#004191"
           textColor="#fff"
           bottom
           stickToKeyboard
+          onPress={onSubmit}
         />
       </KeyboardAvoidingView>
     </View>
@@ -107,7 +128,7 @@ const styles = StyleSheet.create({
     right: -5,
     borderWidth: 1,
     borderColor: '#d0d5d9',
-    borderRadius: 16,
+    borderRadius: 17,
     padding: 8,
     backgroundColor: '#fff',
   },

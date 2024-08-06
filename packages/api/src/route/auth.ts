@@ -5,9 +5,7 @@ import { z } from 'zod'
 
 import { env } from '@/env'
 
-const app = new Hono()
-
-app.post(
+const app = new Hono().post(
   '/kaist/signin',
   zValidator(
     'form',

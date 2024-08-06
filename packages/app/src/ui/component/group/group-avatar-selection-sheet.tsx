@@ -1,5 +1,6 @@
 import { useAssets } from 'expo-asset'
 import { Image } from 'expo-image'
+import { SaveFormat, manipulateAsync } from 'expo-image-manipulator'
 import {
   MediaTypeOptions,
   launchCameraAsync,
@@ -13,20 +14,21 @@ import { FlatList, Pressable, StyleSheet, View } from 'react-native'
 import { SvgProps } from 'react-native-svg'
 import { match } from 'ts-pattern'
 
+import type { Avatar } from '@/type/avatar'
 import { BottomButton } from '@/ui/component/BottomButton'
 import { ThemedText } from '@/ui/component/ThemedText'
 import { Camera2Fill } from '@/ui/icon/Camera2Fill'
 import { PicFill } from '@/ui/icon/PicFill'
 
 type GroupAvatarSelectionSheetProps = {
-  initialAvatar: string | undefined
-  resolve: (imageSrc: string) => void
+  initialAvatar: Avatar | undefined
+  resolve: (avatar: Avatar) => void
 }
 
 export const GroupAvatarSelectionSheet: React.FC<
   GroupAvatarSelectionSheetProps
 > = ({ initialAvatar, resolve }) => {
-  const [avatar, setAvatar] = useState<string | undefined>(initialAvatar)
+  const [avatar, setAvatar] = useState<Avatar | undefined>(initialAvatar)
   const [cameraPermission, requestCameraPermission] = useCameraPermissions()
   const [mediaPermission, requestMediaPermission] = useMediaLibraryPermissions()
   const [assets] = useAssets([
@@ -54,7 +56,16 @@ export const GroupAvatarSelectionSheet: React.FC<
       aspect: [1, 1],
       quality: 1,
     })
-    if (!result.canceled) setAvatar(result.assets[0].uri)
+
+    if (result.canceled) return
+
+    const manipulated = await manipulateAsync(
+      result.assets[0].uri,
+      [{ resize: { width: 200, height: 200 } }],
+      { compress: 1, format: SaveFormat.PNG },
+    )
+
+    setAvatar({ uri: manipulated.uri, isLocal: false })
   }
 
   const pickImage = async () => {
@@ -69,7 +80,16 @@ export const GroupAvatarSelectionSheet: React.FC<
       aspect: [1, 1],
       quality: 1,
     })
-    if (!result.canceled) setAvatar(result.assets[0].uri)
+
+    if (result.canceled) return
+
+    const manipulated = await manipulateAsync(
+      result.assets[0].uri,
+      [{ resize: { width: 200, height: 200 } }],
+      { compress: 1, format: SaveFormat.PNG },
+    )
+
+    setAvatar({ uri: manipulated.uri, isLocal: false })
   }
 
   const images: (
@@ -107,7 +127,7 @@ export const GroupAvatarSelectionSheet: React.FC<
               </Pressable>
             ))
             .with({ type: 'image' }, ({ src }) => (
-              <Pressable onPress={() => setAvatar(src)}>
+              <Pressable onPress={() => setAvatar({ uri: src, isLocal: true })}>
                 <Image source={src} style={styles.listItem} />
               </Pressable>
             ))

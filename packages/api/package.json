@@ -2,20 +2,29 @@
   "name": "@kaist-village-hall/api",
   "version": "0.1.0",
   "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "bun build src/index.ts --outdir build --target bun",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
     "build:image": "docker build -f ../../.docker/api.Dockerfile -t yuwol/kaist-village-hall-api --platform linux/amd64 ../..",
     "db": "docker compose -f ../../.docker/docker-compose.dev.yml",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "dev": "bun run --hot src/index.ts"
+    "dev": "tsx watch --env-file=.env src/index.ts"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.623.0",
+    "@aws-sdk/s3-request-presigner": "^3.623.0",
+    "@hono/node-server": "^1.12.0",
     "@hono/zod-validator": "^0.2.2",
     "drizzle-orm": "^0.31.2",
     "drizzle-zod": "^0.5.1",
-    "hono": "^4.4.7",
+    "hono": "^4.5.3",
     "postgres": "^3.4.4",
     "qs": "^6.12.3",
     "zod": "^3.23.8"
@@ -23,6 +32,8 @@
   "devDependencies": {
     "@types/qs": "^6.9.15",
     "drizzle-kit": "^0.22.7",
+    "tsup": "^8.2.4",
+    "tsx": "^4.16.5",
     "typescript": "^5.5.2"
   }
 }

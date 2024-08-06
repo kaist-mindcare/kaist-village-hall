@@ -1,7 +1,10 @@
+import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
 
+import { env } from '@/env'
 import auth from '@/route/auth'
+import bucket from '@/route/bucket'
 
 const app = new Hono({ strict: false })
 
@@ -9,6 +12,10 @@ const app = new Hono({ strict: false })
 app.use(logger())
 
 // Routes
-app.route('/auth', auth)
+const routes = app.route('/auth', auth).route('/bucket', bucket)
+export type AppType = typeof routes
 
-export default app
+serve({
+  fetch: app.fetch,
+  port: env.API_PORT,
+})

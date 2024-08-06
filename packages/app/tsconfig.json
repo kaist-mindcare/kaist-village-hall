@@ -11,8 +11,17 @@
     "strict": true,
 
     /* Modules */
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "isolatedModules": true,
+
+    /* Language and Environment */
+    "target": "ESNext"
   }
 }
